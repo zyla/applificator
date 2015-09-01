@@ -1,4 +1,4 @@
-name:                skify
+name:                applificator
 version:             0.1.0.0
 license-file:        LICENSE
 author:              Maciej Bielecki
@@ -6,7 +6,7 @@ maintainer:          zyla@prati.pl
 build-type:          Simple
 cabal-version:       >=1.10
 
-executable skify
+executable applificator
   main-is:             Main.hs
   other-modules:       Types, Parser
   default-extensions:  PatternSynonyms
