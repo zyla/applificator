@@ -8,6 +8,7 @@ cabal-version:       >=1.10
 
 executable skify
   main-is:             Main.hs
-  other-extensions:    PatternSynonyms
+  default-extensions:  PatternSynonyms
+  ghc-options:         -Werror -fwarn-incomplete-patterns
   build-depends:       base >=4.7 && <4.10
   default-language:    Haskell2010
