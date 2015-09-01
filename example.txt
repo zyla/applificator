@@ -1,0 +1,32 @@
+$ applificator '\f x y -> f y x' # flip
+\f x y -> f y x
+\f x -> S(\y -> f y) (\y -> x)
+\f -> S(\x -> S(\y -> f y)) (\x y -> x)
+S(\f -> S(\x -> S(\y -> f y))) (\f x y -> x)
+S(S(\f -> S) (\f x -> S(\y -> f y))) (\f x -> Kx)
+S(S(KS)(\f -> S(\x -> S) (\x y -> f y))) (\f -> S(\x -> K) (\x -> x))
+S(S(KS)(S(\f -> S(\x -> S)) (\f x y -> f y))) (S(\f -> S(\x -> K)) (\f x -> x))
+S(S(KS)(S(S(\f -> S) (\f x -> S)) (\f x -> S(\y -> f) (\y -> y)))) (S(S(\f -> S) (\f x -> K)) (KI))
+S(S(KS)(S(S(KS)(K(KS)))(\f -> S(\x -> S(\y -> f)) (\x y -> y)))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(\f -> S(\x -> S(\y -> f))) (\f x y -> y)))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(S(\f -> S) (\f x -> S(\y -> f))) (K(KI))))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(\f -> S(\x -> S) (\x y -> f))) (K(KI))))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(S(\f -> S(\x -> S)) (\f x y -> f))) (K(KI))))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(S(S(\f -> S) (\f x -> S)) (\f x -> Kf))) (K(KI))))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(S(S(KS)(K(KS)))(\f -> S(\x -> K) (\x -> f)))) (K(KI))))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(S(S(KS)(K(KS)))(S(\f -> S(\x -> K)) (\f x -> f)))) (K(KI))))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(S(S(KS)(K(KS)))(S(S(\f -> S) (\f x -> K)) (\f -> Kf)))) (K(KI))))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(K(KK)))(S(\f -> K) (\f -> f))))) (K(KI))))) (S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(S(S(KS)(K(KS)))(S(S(KS)(K(KK)))(S(KK)I))))(K(KI)))))(S(S(KS)(K(KK)))(KI))
+S(S(KS)(S(K(S(KS)))(S(S(KS)(S(K(S(KS)))(S(K(S(KK)))(S(KK)I))))(K(KI)))))(S(K(S(KK)))(KI))
+S(S(KS)(S(K(S(KS)))(S(S(KS)(S(K(S(KS)))(S(K(S(KK)))(S(KK)I))))(K(KI)))))(K(S(KK)I))
+pure (<*>) <*> (pure (pure (<*>) <*>) <*> (pure (<*>) <*> (pure (pure (<*>) <*>) <*> (pure (pure pure <*>) <*> (pure pure <*> id))) <*> (pure (pure id)))) <*> (pure (pure pure <*> id))
+$ ghci
+GHCi, version 7.8.3: http://www.haskell.org/ghc/  :? for help
+λ> :m + Control.Applicative
+λ> :t pure (<*>) <*> (pure (pure (<*>) <*>) <*> (pure (<*>) <*> (pure (pure (<*>) <*>) <*> (pure (pure pure <*>) <*> (pure pure <*> id))) <*> (pure (pure id)))) <*> (pure (pure pure <*> id))
+pure (<*>) <*> (pure (pure (<*>) <*>) <*> (pure (<*>) <*> (pure (pure (<*>) <*>) <*> (pure (pure pure <*>) <*> (pure pure <*> id))) <*> (pure (pure id)))) <*> (pure (pure pure <*> id))
+  :: (a1 -> a -> b) -> a -> a1 -> b
+λ> :t flip
+flip :: (a -> b -> c) -> b -> a -> c
+λ> 
