@@ -4,7 +4,12 @@
 -- > I = id    :: a -> a
 module Main where
 
+import Data.List (intercalate)
+import System.Environment (getArgs)
+import System.Exit (exitWith, ExitCode(ExitFailure))
+
 import Types
+import Parser
 
 -- | One step of lambda -> SKI conversion.
 -- WARNING: This is a partial function (errors out on free variables).
@@ -75,25 +80,21 @@ process input = (lambdaSteps, skiSteps, finalLambda)
     finalLambda = backToLambda $ last skiSteps
 
 main = do
-    let input = flip'
+    input <- getInputStr >>= parseOrExit
     let (lambdaSteps, skiSteps, finalLambda) = process input
     mapM_ print lambdaSteps
     mapM_ print skiSteps
     print finalLambda
 
--- examples
+parseOrExit str = case parseLambda str of
+    Left error -> print error >> exitWith (ExitFailure 1)
+    Right val -> return val
 
-id' :: Lambda
-id' = Lambda "x" $ LVar "x"
-
-apply :: Lambda
-apply = Lambda "f" $ Lambda "x" $ LApp (LVar "f") (LVar "x")
-
-compose :: Lambda
-compose = Lambda "f" $ Lambda "g" $ Lambda "x" $ LApp (LVar "f") (LApp (LVar "g") (LVar "x"))
-
-flip' :: Lambda
-flip' = Lambda "f" $ Lambda "x" $ Lambda "y" $ LApp (LApp (LVar "f") (LVar "y")) (LVar "x")
+getInputStr = do
+    args <- getArgs
+    case args of
+        [] -> getLine
+        xs -> return $ intercalate " " xs
 
 -- Random shit
 
