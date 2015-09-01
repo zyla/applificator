@@ -56,6 +56,7 @@ simplSKIStep :: SKI -> SKI
 simplSKIStep (A1 I x) = x
 simplSKIStep (A2 K _ x) = x
 simplSKIStep (A2 S (A1 K f) (A1 K x)) = A1 K (A1 f x)
+simplSKIStep (A2 S (A1 K K) I) = K
 simplSKIStep (A1 f x) = A1 (simplSKIStep f) (simplSKIStep x)
 simplSKIStep ski = ski
 
