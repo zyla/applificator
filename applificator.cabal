@@ -1,6 +1,6 @@
 name:                applificator
 version:             0.1.0.0
-license-file:        LICENSE
+license:             BSD3
 author:              Maciej Bielecki
 maintainer:          zyla@prati.pl
 build-type:          Simple
