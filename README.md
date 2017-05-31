@@ -1,4 +1,4 @@
-Convert any lambda calculus expression to SKI, and then back to Haskell.
+Convert any lambda calculus expression to [SKI](https://en.wikipedia.org/wiki/SKI_combinator_calculus), and then back to Haskell.
 
 This is based on the fact that all three combinators of SKI already exist in
 Haskell standard library (`Control.Applicative` needs to be imported though).
